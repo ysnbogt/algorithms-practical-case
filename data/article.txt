@@ -1,0 +1,9 @@
+Python (created by Guido van Rossum in 1991) is a widely-used programming language.
+This language is suitable for a wide range of tasks, including web development (using Django, Flask), data analysis (with libraries like pandas and NumPy), and more.
+However, some people argue that Python is not suitable for areas where performance is critical, such as game development (although there are exceptions, like "Civilization IV", which was partly written in Python).
+Python 3.8 introduced a new syntax for assignment expressions, called "The Walrus Operator" ({:=}).
+Despite its strange name (which comes from its resemblance to the eyes and tusks of a walrus), this operator has been warmly received by many in the Python community.
+On the other hand, some developers (especially those new to the language) find it confusing.
+In general, Python's readability (and its emphasis on "There should be one--and preferably only one--obvious way to do it") makes it a great language for beginners.
+And there's an invalid sentence here (without a closing bracket.
+Here's another one with mismatched brackets [).
