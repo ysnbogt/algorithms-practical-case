@@ -1,7 +1,34 @@
+# ╭─ Zsh ─────────────────────────────────────────────────────────────────────────────────────────╮
+# ├───────────────────────────────────────────────────────────────────────────────────────────────┤
+# │ $ brew install gawk                                                                           │
+# ╰───────────────────────────────────────────────────────────────────────────────────────────────╯
+
+# ╭── README.md ──────────────────────────────────────────────────────────────────────────────────╮
+# ├───────────────────────────────────────────────────────────────────────────────────────────────┤
+# │ ---                                                                                           │
+# │ name: bold                                                                                    │
+# │ url: blue                                                                                     │
+# │ easy: green                                                                                   │
+# │ medium: yellow                                                                                │
+# │ hard: red                                                                                     │
+# │ ---                                                                                           │
+# │                                                                                               │
+# │ | Name   | Difficulty | Language | URL                          |                             │
+# │ | ------ | ---------- | -------- | ---------------------------- |                             │
+# │ | First  | Easy       | Python   | https://.../problems/first/  |                             │
+# │ | Second | Medium     | Python   | https://.../problems/second/ |                             │
+# │ | Third  | Hard       | Python   | https://.../problems/third/  |                             │
+# ╰───────────────────────────────────────────────────────────────────────────────────────────────╯
+
+# ╭─ Zsh ─────────────────────────────────────────────────────────────────────────────────────────╮
+# ├───────────────────────────────────────────────────────────────────────────────────────────────┤
+# │ $ gawk -f main.awk README.md                                                                  │
+# ╰───────────────────────────────────────────────────────────────────────────────────────────────╯
+
 BEGIN {
     color["reset"] = "\033[0m";
 
-    // Basic Colors
+    # Basic Colors
     color["black"] = "\033[30m";
     color["red"] = "\033[31m";
     color["green"] = "\033[32m";
@@ -11,7 +38,7 @@ BEGIN {
     color["cyan"] = "\033[36m";
     color["white"] = "\033[37m";
 
-    // Bright Colors
+    # Bright Colors
     color["brightBlack"] = "\033[30;1m";
     color["brightRed"] = "\033[31;1m";
     color["brightGreen"] = "\033[32;1m";
@@ -21,7 +48,7 @@ BEGIN {
     color["brightCyan"] = "\033[36;1m";
     color["brightWhite"] = "\033[37;1m";
 
-    // Background Colors
+    # Background Colors
     color["bgBlack"] = "\033[40m";
     color["bgRed"] = "\033[41m";
     color["bgGreen"] = "\033[42m";
@@ -31,7 +58,7 @@ BEGIN {
     color["bgCyan"] = "\033[46m";
     color["bgWhite"] = "\033[47m";
 
-    // Bright Background Colors
+    # Bright Background Colors
     color["bgBrightBlack"] = "\033[40;1m";
     color["bgBrightRed"] = "\033[41;1m";
     color["bgBrightGreen"] = "\033[42;1m";
@@ -41,7 +68,7 @@ BEGIN {
     color["bgBrightCyan"] = "\033[46;1m";
     color["bgBrightWhite"] = "\033[47;1m";
 
-    // Decorations
+    # Decorations
     color["bold"] = "\033[1m";
     color["underline"] = "\033[4m";
     color["blink"] = "\033[5m";
