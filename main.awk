@@ -3,6 +3,9 @@
 # │ $ brew install gawk                                                                           │
 # ╰───────────────────────────────────────────────────────────────────────────────────────────────╯
 
+# In FrontMatter, you can decorate tables, define decorations for an entire column, or specify
+# decorations for specific values in a cell.
+
 # ╭─ Markdown ─ README.md ────────────────────────────────────────────────────────────────────────╮
 # ├───────────────────────────────────────────────────────────────────────────────────────────────┤
 # │ ---                                                                                           │
