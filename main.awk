@@ -28,8 +28,11 @@
 # │ $ gawk -f main.awk README.md                                                                  │
 # ╰───────────────────────────────────────────────────────────────────────────────────────────────╯
 
+# The BEGIN block, executes before any input is read.
+# It is used to initialize a list of ANSI escape codes for color in the console.
 BEGIN {
-    color["reset"] = "\033[0m";
+    # Initialize ANSI color codes
+    color["reset"] = "\033[0m";  # Reset all attributes
 
     # Basic Colors
     color["black"] = "\033[30m";
@@ -79,49 +82,89 @@ BEGIN {
     color["hidden"] = "\033[8m";
 }
 
+# This block handles '---' separators. It's using a flag to indicate if we are 
+# inside a section enclosed by '---' separators.
 /---/ && !flag {
+    # Set a flag when the first '---' separator is encountered
     flag = 1;
     next;
 }
 
 /---/ && flag {
+    # Clear the flag when the next '---' separator is encountered
     flag = 0;
     next;
 }
 
+# This block is for processing lines between '---' separators. This is where
+# color configurations are defined.
 flag {
+    # Split each line into key:value pairs
     split($0, arr, ":");
+
+    # Extract the key and the value from the array
     key = arr[1];
     value = arr[2];
+
+    # Remove leading/trailing spaces from key and value
     gsub(/^[ \t]+|[ \t]+$/, "", key);
     gsub(/^[ \t]+|[ \t]+$/, "", value);
+
+    # Convert key and value to lower case and add them to 'data' array
     data[tolower(key)] = tolower(value);
 }
 
+# This block processes lines beginning with '|Name'
+# It is used to parse the table headers.
 /^(\|[ \t]*Name[ \t]*\|)/ {
+    # Record the line number of the end of the header
     header_end = NR;
+
+    # Split the header line into its cells
     split($0, arr, "|");
+
+    # For each cell in the header
     for (i = 2; i < length(arr); i++) {
+        # Remove leading/trailing spaces from the cell
         gsub(/^[ \t]+|[ \t]+$/, "", arr[i]);
+
+        # Add the cell to the 'headers' array
         headers[i] = tolower(arr[i]);
     }
 }
 
+# This block processes lines beginning with '|'.
+# It is used to parse the table data.
 /^\|/ {
+    # Split each line into its cells
     n = split($0, arr, "|");
+
+    # For each cell
     for (i = 2; i < n; i++) {
+        # Extract the cell content
         cell = arr[i];
+
+        # Remove leading/trailing spaces from the cell
         gsub(/^[ \t]+|[ \t]+$/, "", cell);
+
+        # Update the maximum cell length for this column if necessary
         if (length(cell) > max_length[i]) {
             max_length[i] = length(cell);
         }
+
+        # Add the cell to the 'row' array
         row[NR,i] = cell;
     }
 }
 
+# The END block, executes after all input is read.
+# It is used to print the final formatted output.
 END {
+    # Loop over each row
     for (r = 1; r <= NR; r++) {
+        # If current row is the header row
         if (r == header_end) {
+            # Print the header row and a row of dashes
             for (i = 2; i < n; i++) {
                 printf "| %-*s ", max_length[i], row[r,i];
             }
@@ -130,7 +173,9 @@ END {
                 printf("| %-*s ", max_length[i], gensub(/./, "-", "g", sprintf("%-*s", max_length[i], "")));
             }
             print "|";
+        # If current row is a data row
         } else if (r > header_end) {
+            # Print the data row with color coding
             for (i = 2; i < n; i++) {
                 cell = row[r,i];
                 lower_cell = tolower(cell);
