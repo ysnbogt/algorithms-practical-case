@@ -174,7 +174,7 @@ END {
             }
             print "|";
         # If current row is a data row
-        } else if (r > header_end) {
+        } else if (r > header_end + 1) {
             # Print the data row with color coding
             for (i = 2; i < n; i++) {
                 cell = row[r,i];
