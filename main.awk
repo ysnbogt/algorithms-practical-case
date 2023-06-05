@@ -160,19 +160,36 @@ flag {
 # The END block, executes after all input is read.
 # It is used to print the final formatted output.
 END {
+    printf("\n");
     # Loop over each row
     for (r = 1; r <= NR; r++) {
+        # If current row is the top border row
+        if (r == 1) {
+            # Print the top border row
+            for (i = 2; i < n; i++) {
+                if (i == 2) {
+                    printf("┌%-*s──", max_length[i], gensub(/./, "─", "g", sprintf("%-*s", max_length[i], "")));
+                } else {
+                    printf("┬%-*s──", max_length[i], gensub(/./, "─", "g", sprintf("%-*s", max_length[i], "")));
+                }
+            }
+            print("┐");
+        }
         # If current row is the header row
         if (r == header_end) {
             # Print the header row and a row of dashes
             for (i = 2; i < n; i++) {
-                printf "| %-*s ", max_length[i], row[r,i];
+                printf "│ %-*s ", max_length[i], row[r,i];
             }
-            print "|";
+            print("│");
             for (i = 2; i < n; i++) {
-                printf("| %-*s ", max_length[i], gensub(/./, "-", "g", sprintf("%-*s", max_length[i], "")));
+                if (i == 2) {
+                    printf("├%-*s──", max_length[i], gensub(/./, "─", "g", sprintf("%-*s", max_length[i], "")));
+                } else {
+                    printf("┼%-*s──", max_length[i], gensub(/./, "─", "g", sprintf("%-*s", max_length[i], "")));
+                }
             }
-            print "|";
+            print("┤");
         # If current row is a data row
         } else if (r > header_end + 1) {
             # Print the data row with color coding
@@ -186,9 +203,22 @@ END {
                 } else {
                     color_code = color["reset"];
                 }
-                printf "| %s%-*s%s ", color_code, max_length[i], cell, color["reset"];
+                printf "│ %s%-*s%s ", color_code, max_length[i], cell, color["reset"];
             }
-            print "|";
+            print("│");
+        }
+        # If current row is the last row
+        if (r == NR) {
+            # Print a row of dashes
+            for (i = 2; i < n; i++) {
+                if (i == 2) {
+                    printf("└%-*s──", max_length[i], gensub(/./, "─", "g", sprintf("%-*s", max_length[i], "")));
+                } else {
+                    printf("┴%-*s──", max_length[i], gensub(/./, "─", "g", sprintf("%-*s", max_length[i], "")));
+                }
+            }
+            print("┘");
         }
     }
+    printf("\n");
 }
