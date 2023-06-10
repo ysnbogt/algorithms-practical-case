@@ -23,3 +23,7 @@ boolean: magenta
 | Valid Anagram                                      | Easy       | boolean     | O(n)            | O(1)             |
 | Repeated Substring Pattern                         | Easy       | boolean     | O(n)            | O(n)             |
 | Move Zeroes                                        | Easy       | void        | O(n)            | O(1)             |
+
+---
+
+![](./image.png)
